@@ -1,52 +1,130 @@
 ﻿body {
-    background-color: papayawhip;
+    background-color: whitesmoke;
+    font-family: 'Montserrat', sans-serif;
 }
+
+.list-for-dispositor table {
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+    .list-for-dispositor table thead {
+        height: 70px;
+        display: block;
+        color: #fefefe;
+        background-color: #4075c9;
+    }
+
+    .list-for-dispositor table tbody {
+        display: block;
+        height: 350px;
+        overflow-y: scroll;
+    }
+
+        .list-for-dispositor table tbody tr {
+            border-bottom: 1px solid #dedede;
+            background-color: #eeeeff;
+        }
+
+            .list-for-dispositor table tbody tr:nth-of-type(even) {
+                background-color: #ffffff;
+            }
+
+            .list-for-dispositor table tbody tr td {
+                padding: 20px 2px;
+            }
 
 .wrapper {
     width: 1280px;
     margin-left: auto;
     margin-right: auto;
-    padding: 20px;
     text-align: center;
 }
 
 .list-for-dispositor {
-    height: 420px;
+    height: 540px;
     width: 560px;
     margin-left: 40px;
     margin-right: 40px;
     float: left;
-
-    background-color: blueviolet;
-}
-
-.list-scroll {
-    height: 380px;
-    overflow-y: scroll;
+    text-align: left;
 }
 
 .table-header {
-    height: 36px;
-    font-size: 18px;
-    text-align: left;
+    height: 70px;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .data-row {
-    height: 24px;
-    text-align: left;
+    height: 40px;
 }
 
-.namecell {
-    width: 100px;
-    padding-left: 20px;
+.id-cell {
+    max-width: 70px;
+    min-width: 70px;
 }
 
-.addresscell {
-    width: 300px;
+.location-cell {
+    max-width: 220px;
+    min-width: 220px;
 }
 
-.buttoncell {
-    width: 60px;
+.priority-cell {
+    max-width: 120px;
+    min-width: 120px;
+}
+
+.button-cell {
+    max-width: 130px;
+    min-width: 130px;
+}
+
+.button-header {
+    max-width: 150px;
+    min-width: 150px;
+}
+
+.helper-id-cell {
+    max-width: 70px;
+    min-width: 70px;
+}
+
+.helper-location-cell {
+    max-width: 220px;
+    min-width: 220px;
+}
+
+.helper-products-cell {
+    max-width: 120px;
+    min-width: 120px;
+}
+
+.helper-button-cell {
+    max-width: 130px;
+    min-width: 130px;
+}
+
+.helper-button-header {
+    max-width: 150px;
+    min-width: 150px;
+}
+
+.matcher {
+    width: 1280px;
+    color: #fefefe;
+    background-color: #4075c9;
+}
+
+.matcher-person-in-need {
+    max-width: 640px;
+    min-width: 640px;
+}
+
+.matcher-helper {
+    max-width: 640px;
+    min-width: 640px;
 }
 
 .empty {
