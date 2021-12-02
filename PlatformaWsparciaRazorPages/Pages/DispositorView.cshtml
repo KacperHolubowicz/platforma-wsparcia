@@ -1,0 +1,34 @@
+﻿@page
+@model PlatformaWsparciaRazorPages.Pages.DispositorViewModel
+@{
+}
+
+<div class="wrapper">
+    <h1>DISPOSITOR VIEW</h1>
+
+    <div class="list-for-dispositor">
+        <table>
+            <tr class="table-header">
+                <td class="namecell"> Name </td>
+                <td class="namecell"> Surname </td>
+                <td class="addresscell"> Address </td>
+                <td class="buttoncell"> Action </td>
+            </tr>
+        </table>
+        <div class="list-scroll">
+            <table id="people-in-need">
+            </table>
+        </div>
+    </div>
+
+    <div class="list-for-dispositor">
+        <ul>
+            <li>coś</li>
+            <li>coś</li>
+        </ul>
+    </div>
+    <div class="empty"></div>
+</div>
+
+<script src="~/js/dispositorView.js"></script>
+<script>main();</script>
