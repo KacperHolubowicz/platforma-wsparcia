@@ -203,8 +203,9 @@ let insertListItem = (elementID, tag, content) => {
 let addPersonInNeedToMatch = (personInNeed) => () => {
     chosenPersonInNeed = personInNeed;
 
-    document.getElementsByClassName('matcher-person-in-need')[1]
-        .innerHTML = personInNeed.firstName + ' ' + personInNeed.lastName + ' ' + personInNeed.personInNeedID;
+    document.getElementsByClassName('matcher-person-in-need')[1].innerHTML = personInNeed.firstName + ' '
+        + personInNeed.lastName + ' (ID: ' + personInNeed.personInNeedID
+        + '), priority: ' + personInNeed.lifeSituation.priority;
 };
 
 //arrow func that returns arrow func
@@ -223,17 +224,15 @@ let showPersonInNeed = (personInNeed) => () => {
     insertListItem('in-need-age', 'Age', personInNeed.lifeSituationClassification.age);
 
     let lsc = personInNeed.lifeSituationClassification;
-    insertListItem('in-need-town-population', 'Town population', lsc.townPopulation);
+    insertListItem('in-need-town-population', 'Town population (0-4)', lsc.townPopulation);
     insertListItem('in-need-household-size', 'Size of household', lsc.householdSize);
-    insertListItem('in-need-financial-situation', 'Financial situation (1-5)', lsc.financialSituation);
-    insertListItem('in-need-health-situation', 'Health situation (1-5)', lsc.healthSituation);
-    insertListItem('in-need-standard-of-living', 'Standard of living (1-5)', lsc.standardOfLiving);
-    insertListItem('in-need-family-situation', 'Family situation (1-5)', lsc.familySituation);
+    insertListItem('in-need-financial-situation', 'Financial situation', lsc.financialSituation);
+    insertListItem('in-need-health-situation', 'Health situation (0-4)', lsc.healthSituation);
+    insertListItem('in-need-standard-of-living', 'Standard of living (0-4)', lsc.standardOfLiving);
+    insertListItem('in-need-family-situation', 'Family situation (0-4)', lsc.familySituation);
     insertListItem('in-need-chronic-illnesses', 'Chronic illnesses', lsc.chronicIlnesses);
     insertListItem('in-need-dependence', 'Dependence', lsc.dependence);
     insertListItem('in-need-priority', 'Suggested priority', personInNeed.lifeSituation.priority);
-
-    //DESCRIPTION! EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     insertListItem('in-need-description', 'Description', personInNeed.lifeSituation.description);
 
     let inNeedProductList = document.getElementById('in-need-product-list');
@@ -268,10 +267,12 @@ let loadPeopleInNeed = (peopleInNeed) => {
         let buttonsCell = createTableCell('button-cell', '');
 
         let addButton = document.createElement('button');
+        addButton.classList = 'app-button';
         addButton.innerHTML = 'Add';
         addButton.onclick = addPersonInNeedToMatch(personInNeed);
 
         let showButton = document.createElement('button');
+        showButton.classList = 'app-button';
         showButton.innerHTML = 'Show';
         showButton.onclick = showPersonInNeed(personInNeed);
 
@@ -290,7 +291,7 @@ let loadPeopleInNeed = (peopleInNeed) => {
 let addHelperToMatch = (helper) => () => {
     chosenHelper = helper;
     document.getElementsByClassName('matcher-helper')[1]
-        .innerHTML = helper.firstName + ' ' + helper.lastName + ' ' + helper.donorID;
+        .innerHTML = helper.firstName + ' ' + helper.lastName + ' (ID: ' + helper.donorID + ')';
 };
 
 //arrow func that returns arrow func
@@ -317,6 +318,16 @@ let showHelper = (helper) => () => {
     document.getElementById('add-helper-from-modal').onclick = addHelperToMatch(helper);
 };
 
+let isIn = (list, item) => {
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] === item) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 let loadHelpers = (helpers) => {
     let helpersTable = document.getElementById('helpers');
 
@@ -333,14 +344,32 @@ let loadHelpers = (helpers) => {
             helper.personalDetails.postcode + ' ' + helper.personalDetails.town
         );
 
-        let productsCell = createTableCell('helper-products-cell', helper.products[0].productType);
+        let oldProductTypes = [];
+        let offeredProductTypes = '';
+
+        for (let i = 0; i < helper.products.length; i++) {
+            let prodType = helper.products[i].productType;
+
+            if (!isIn(oldProductTypes, prodType)) {
+                if (i !== 0) {
+                    offeredProductTypes += ', ';
+                }
+
+                offeredProductTypes += prodType;
+                oldProductTypes.push(prodType);
+            }
+        }
+
+        let productsCell = createTableCell('helper-products-cell', offeredProductTypes);
         let actionCell = createTableCell('helper-button-cell', '');
 
         let addButton = document.createElement('button');
+        addButton.classList = 'app-button';
         addButton.innerHTML = 'Add';
         addButton.onclick = addHelperToMatch(helper);
 
         let showButton = document.createElement('button');
+        showButton.classList = 'app-button';
         showButton.innerHTML = 'Show';
         showButton.onclick = showHelper(helper);
 
@@ -358,6 +387,10 @@ let loadHelpers = (helpers) => {
 
 //TODO
 let match = () => {
+    if (chosenHelper == null || chosenPersonInNeed == null) {
+        return;
+    }
+
     alert(chosenPersonInNeed.lastName + ' ' + chosenHelper.lastName);
 };
 

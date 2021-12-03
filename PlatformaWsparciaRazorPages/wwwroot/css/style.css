@@ -3,6 +3,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+h1.list-header {
+    width: 100%;
+    text-align: center;
+}
+
 .list-for-dispositor table {
     border-collapse: collapse;
     border-radius: 16px;
@@ -31,14 +36,15 @@
                 background-color: #ffffff;
             }
 
-            .list-for-dispositor table tbody tr td {
-                padding: 20px 2px;
+            .list-for-dispositor table tbody tr td, .list-for-dispositor table thead tr td {
+                padding: 20px 0 20px 23px;
             }
 
 .wrapper {
     width: 1280px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 32px;
     text-align: center;
 }
 
@@ -49,6 +55,10 @@
     margin-right: 40px;
     float: left;
     text-align: left;
+}
+
+.list-for-dispositor-table {
+    width: 100%;
 }
 
 .table-header {
@@ -62,23 +72,24 @@
 }
 
 .id-cell {
-    max-width: 70px;
-    min-width: 70px;
+    max-width: 30px;
+    min-width: 30px;
 }
 
 .location-cell {
-    max-width: 220px;
-    min-width: 220px;
+    max-width: 160px;
+    min-width: 160px;
 }
 
 .priority-cell {
     max-width: 120px;
     min-width: 120px;
+    text-align: center;
 }
 
 .button-cell {
-    max-width: 130px;
-    min-width: 130px;
+    max-width: 150px;
+    min-width: 150px;
 }
 
 .button-header {
@@ -87,76 +98,132 @@
 }
 
 .helper-id-cell {
-    max-width: 70px;
-    min-width: 70px;
+    max-width: 30px;
+    min-width: 30px;
 }
 
 .helper-location-cell {
-    max-width: 220px;
-    min-width: 220px;
+    max-width: 170px;
+    min-width: 170px;
 }
 
 .helper-products-cell {
+    max-width: 142px;
+    min-width: 142px;
+}
+
+.helper-button-cell {
+    max-width: 110px;
+    min-width: 110px;
+}
+
+.helper-button-header {
     max-width: 120px;
     min-width: 120px;
 }
 
-.helper-button-cell {
-    max-width: 130px;
-    min-width: 130px;
-}
-
-.helper-button-header {
-    max-width: 150px;
-    min-width: 150px;
-}
-
 .matcher {
-    width: 1280px;
+    width: 1200px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-radius: 20px;
     color: #fefefe;
     background-color: #4075c9;
 }
 
-.matcher-person-in-need {
+.matcher-person-in-need, .matcher-helper {
     max-width: 640px;
     min-width: 640px;
-}
-
-.matcher-helper {
-    max-width: 640px;
-    min-width: 640px;
+    font-size: larger;
 }
 
 .empty {
     clear: both;
 }
 
-.modal-window {
+.modal-window, .right-modal-window {
     display: none;
-    position: fixed;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 100;
-    left: 0;
-    bottom: 0;
-    height: 300px;
-    width: 49%;
+    height: 45%;
+    width: 60%;
     overflow: visible;
-    background-color: lightgray;
-    border-radius: 0 20px 0 0;
+    background-color: #f0f0f0;
+    border: 2px solid gray;
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.right-modal-window {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    right: 0;
-    bottom: 0;
-    height: 300px;
-    width: 49%;
-    overflow: visible;
-    background-color: lightgray;
-    border-radius: 20px 0 0 0;
+    .modal-window .info-holder {
+        max-width: 260px;
+        min-width: 260px;
+        float: left;
+    }
+
+    .right-modal-window .info-holder {
+        max-width: 390px;
+        min-width: 390px;
+        font-size: 20px;
+        float: left;
+    }
+
+.info-holder ul li {
+    margin-top: 5px;
 }
 
-.info-holder {
+.buttons-holder {
+    width: 140px;
+    text-align: right;
     float: left;
+}
+
+button.modal-window-button {
+    border: none;
+    color: #fefefe;
+    background-color: gray;
+    margin-right: 5px;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+button.app-button {
+    border: none;
+    color: #fefefe;
+    background-color: #008CBA;
+    margin-right: 5px;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+    button.modal-window-button:hover, button.app-button:hover, button.match-button:hover, .nav-button:hover {
+        cursor: pointer;
+    }
+
+button.match-button {
+    border: none;
+    color: black;
+    background-color: #fefefe;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+.sticker {
+    color: gray;
+    text-align: left;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 20%;
+    display: inline-block;
+    padding: 0;
+}
+
+.nav-button {
+    background-color: #f0f0f0;
+    border: 1px solid gray;
+    margin: 0;
 }

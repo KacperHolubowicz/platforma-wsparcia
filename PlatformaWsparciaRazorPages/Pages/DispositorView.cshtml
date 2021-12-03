@@ -4,11 +4,9 @@
 }
 
 <div class="wrapper">
-    <h1>DISPOSITOR VIEW</h1>
-
     <div class="list-for-dispositor">
-        <h3> People in need </h3>
-        <table>
+        <h1 class="list-header"> People in need </h1>
+        <table class="list-for-dispositor-table">
             <thead>
                 <tr class="table-header">
                     <td class="id-cell"> ID </td>
@@ -22,13 +20,13 @@
     </div>
 
     <div class="list-for-dispositor">
-        <h3> People eager to help </h3>
-        <table>
+        <h1 class="list-header"> People eager to help </h1>
+        <table class="list-for-dispositor-table">
             <thead>
                 <tr class="table-header">
                     <td class="helper-id-cell"> ID </td>
                     <td class="helper-location-cell"> Location </td>
-                    <td class="helper-products-cell"> Offers for example</td>
+                    <td class="helper-products-cell"> Offers </td>
                     <td class="helper-button-header"> Action </td>
                 </tr>
             </thead>
@@ -51,7 +49,13 @@
             </tr>
         </table>
 
-        <button onclick="match()"> Match </button>
+        <button class="match-button" onclick="match()"> Match </button>
+    </div>
+
+    <!--not implemented yet-->
+    <div class="sticker">
+        <button class="nav-button"> Homepage </button>
+        <button class="nav-button"> View matches </button>
     </div>
 </div>
 
@@ -72,6 +76,11 @@
     </div>
 
     <div class="info-holder">
+        Needed products:
+        <ul id="in-need-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
         Living conditions:
         <ul>
             <li id="in-need-town-population"></li>
@@ -86,14 +95,9 @@
         </ul>
     </div>
 
-    <div class="info-holder">
-        Needed products:
-        <ul id="in-need-product-list"></ul>
-    </div>
-
-    <div class="info-holder">
-        <button onclick="closeModalWindow('modal-window')">X</button>
-        <button id="add-person-in-need-from-modal">Add</button>
+    <div class="buttons-holder">
+        <button class="modal-window-button" id="add-person-in-need-from-modal">Add</button>
+        <button class="modal-window-button" onclick="closeModalWindow('modal-window')">X</button>
     </div>
 
     <div class="empty"></div>
@@ -119,9 +123,9 @@
         <ul id="helper-product-list"></ul>
     </div>
 
-    <div class="info-holder">
-        <button onclick="closeModalWindow('right-modal-window')">X</button>
-        <button id="add-helper-from-modal">Add</button>
+    <div class="buttons-holder">
+        <button class="modal-window-button" id="add-helper-from-modal">Add</button>
+        <button class="modal-window-button" onclick="closeModalWindow('right-modal-window')">X</button>
     </div>
 
     <div class="empty"></div>
