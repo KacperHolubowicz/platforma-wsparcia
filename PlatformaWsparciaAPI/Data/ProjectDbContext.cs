@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlatformaWsparciaAPI.Data.Entity;
+using System;
 
 namespace PlatformaWsparciaAPI.Data
 {
@@ -53,12 +54,11 @@ namespace PlatformaWsparciaAPI.Data
                 .HasMany(p => p.Products)
                 .WithOne(p => p.Person);
 
-            modelBuilder.Entity<Person>()
-                .Property(p => p.Role)
-                .HasConversion<string>();
             modelBuilder.Entity<Product>()
                 .Property(pr => pr.ProductType)
-                .HasConversion<string>();
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (ProductType)Enum.Parse(typeof(ProductType), v));
 
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.Donor);

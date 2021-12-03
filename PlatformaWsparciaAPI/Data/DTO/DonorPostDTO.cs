@@ -6,10 +6,8 @@ namespace PlatformaWsparciaAPI.Data.DTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-#nullable enable
-        public string? Email { get; set; }
-#nullable disable
+        public ContactDetailsDTO ContactDetails { get; set; }
+        public PersonalDetailsDTO PersonalDetails { get; set; }
         public List<ProductDTO> Products { get; set; }
     }
 }

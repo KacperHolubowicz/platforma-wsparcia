@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PlatformaWsparciaAPI.Data.Entity
@@ -12,7 +13,7 @@ namespace PlatformaWsparciaAPI.Data.Entity
         [Required] public Role Role { get; set; }
         [Required] public ContactDetails ContactDetails { get; set; }
         [Required] public List<Product> Products { get; set; }
-        public PersonalDetails PersonalDetails { get; set; }
+        [Required] public PersonalDetails PersonalDetails { get; set; }
         public LifeSituation LifeSituation { get; set; }
         public LifeSituationClassification LifeSituationClassification { get; set; }
     }

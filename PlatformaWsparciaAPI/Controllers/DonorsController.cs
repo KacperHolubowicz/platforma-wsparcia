@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using PlatformaWsparciaAPI.Data;
 using PlatformaWsparciaAPI.Data.DTO;
 using PlatformaWsparciaAPI.Data.Entity;
-using System;
+using PlatformaWsparciaAPI.Data.Mapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PlatformaWsparciaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/donors")]
     [ApiController]
     public class DonorsController : ControllerBase
     {
@@ -26,48 +26,32 @@ namespace PlatformaWsparciaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DonorDTO>))]
         public async Task<IActionResult> GetAllDonors()
         {
-            IEnumerable<DonorDTO> donors = await Task.Run(() => dbContext.People
-                .Where(person => person.Role == Role.Donor)
-                .Select(person => new DonorDTO()
-                {
-                    DonorID = person.PersonID,
-                    FirstName = person.FirstName,
-                    LastName = person.LastName,
-                    Email = person.ContactDetails.Email,
-                    PhoneNumber = person.ContactDetails.PhoneNumber,
-                    Products = person.Products.Select(prod => new ProductDTO()
-                    {
-                        ProductType = prod.ProductType,
-                        ProductName = prod.ProductName
-                    }).ToList()
-                }));
+            var people = dbContext.People
+                .Include(per => per.ContactDetails)
+                .Include(per => per.PersonalDetails)
+                .Include(per => per.Products)
+                .ToList();
 
+            IEnumerable<DonorDTO> donors = await Task.Run(() => people.MapToDTODonor());
             return Ok(donors);
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DonorDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetDonor(int personId)
+        public async Task<IActionResult> GetDonor(int id)
         {
-            var donor = await dbContext.People.FindAsync(personId);
-            if(donor == null)
+            var donor = await dbContext.People
+                .Include(per => per.ContactDetails)
+                .Include(per => per.PersonalDetails)
+                .Include(per => per.Products)
+                .SingleOrDefaultAsync(per => per.PersonID == id);
+
+            if (donor == null)
             {
                 return NotFound();
             }
-            DonorDTO donorDTO = new DonorDTO()
-            {
-                DonorID = donor.PersonID,
-                FirstName = donor.FirstName,
-                LastName = donor.LastName,
-                Email = donor.ContactDetails.Email,
-                PhoneNumber = donor.ContactDetails.PhoneNumber,
-                Products = donor.Products.Select(prod => new ProductDTO()
-                {
-                    ProductType = prod.ProductType,
-                    ProductName = prod.ProductName
-                }).ToList()
-            };
+            DonorDTO donorDTO = donor.MapToDTODonor();
 
             return Ok(donorDTO);
         }
@@ -89,8 +73,14 @@ namespace PlatformaWsparciaAPI.Controllers
                 Role = Role.Donor,
                 ContactDetails = new ContactDetails()
                 {
-                    Email = donor.Email,
-                    PhoneNumber = donor.PhoneNumber
+                    Email = donor.ContactDetails.Email,
+                    PhoneNumber = donor.ContactDetails.PhoneNumber
+                },
+                PersonalDetails = new PersonalDetails()
+                {
+                    Address = donor.PersonalDetails.Address,
+                    Postcode = donor.PersonalDetails.Postcode,
+                    Town = donor.PersonalDetails.Town
                 },
                 Products = products,
                 Matched = false
@@ -100,31 +90,6 @@ namespace PlatformaWsparciaAPI.Controllers
             await dbContext.People.AddAsync(donorEntity);
             await dbContext.Products.AddRangeAsync(products);
             await dbContext.SaveChangesAsync();
-            return Accepted();
-        }
-
-        [HttpPatch("{id}")]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> PatchDonor(int id)
-        {
-            var donor = await dbContext.People.FindAsync(id);
-            if(donor == null)
-            {
-                return NotFound();
-            }
-
-            donor.Matched = true;
-
-            try
-            {
-                await dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                return NotFound();
-            }
-
             return Accepted();
         }
     }

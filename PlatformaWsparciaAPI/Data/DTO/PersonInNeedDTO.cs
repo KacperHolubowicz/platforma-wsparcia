@@ -2,13 +2,15 @@
 
 namespace PlatformaWsparciaAPI.Data.DTO
 {
-    public class DonorDTO
+    public class PersonInNeedDTO
     {
-        public int DonorID { get; set; }
+        public int PersonInNeedID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public ContactDetailsDTO ContactDetails { get; set; }
         public PersonalDetailsDTO PersonalDetails { get; set; }
         public List<ProductDTO> Products { get; set; }
+        public LifeSituationDTO LifeSituation { get; set; }
+        public LifeSituationClassificationDTO LifeSituationClassification { get; set; }
     }
 }
