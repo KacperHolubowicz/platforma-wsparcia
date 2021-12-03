@@ -28,7 +28,7 @@
                 <tr class="table-header">
                     <td class="helper-id-cell"> ID </td>
                     <td class="helper-location-cell"> Location </td>
-                    <td class="helper-products-cell"> Products</td>
+                    <td class="helper-products-cell"> Offers for example</td>
                     <td class="helper-button-header"> Action </td>
                 </tr>
             </thead>
@@ -53,6 +53,78 @@
 
         <button onclick="match()"> Match </button>
     </div>
+</div>
+
+<div class="modal-window">
+    <div class="info-holder">
+        Personal information:
+        <ul>
+            <li id="in-need-id"></li>
+            <li id="in-need-first-name"></li>
+            <li id="in-need-last-name"></li>
+            <li id="in-need-address"></li>
+            <li id="in-need-town"></li>
+            <li id="in-need-zip-code"></li>
+            <li id="in-need-phone-number"></li>
+            <li id="in-need-email"></li>
+            <li id="in-need-age"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Living conditions:
+        <ul>
+            <li id="in-need-town-population"></li>
+            <li id="in-need-household-size"></li>
+            <li id="in-need-financial-situation"></li>
+            <li id="in-need-health-situation"></li>
+            <li id="in-need-standard-of-living"></li>
+            <li id="in-need-family-situation"></li>
+            <li id="in-need-chronic-illnesses"></li>
+            <li id="in-need-dependence"></li>
+            <li id="in-need-priority"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Needed products:
+        <ul id="in-need-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
+        <button onclick="closeModalWindow('modal-window')">X</button>
+        <button id="add-person-in-need-from-modal">Add</button>
+    </div>
+
+    <div class="empty"></div>
+    <div id="in-need-description"></div>
+</div>
+
+<div class="right-modal-window">
+    <div class="info-holder">
+        Personal information:
+        <ul>
+            <li id="helper-id"></li>
+            <li id="helper-first-name"></li>
+            <li id="helper-last-name"></li>
+            <li id="helper-phone-number"></li>
+            <li id="helper-email"></li>
+            <li id="helper-town"></li>
+            <li id="helper-zip-code"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Offered products:
+        <ul id="helper-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
+        <button onclick="closeModalWindow('right-modal-window')">X</button>
+        <button id="add-helper-from-modal">Add</button>
+    </div>
+
+    <div class="empty"></div>
 </div>
 
 <script src="~/js/dispositorView.js"></script>

@@ -130,3 +130,33 @@
 .empty {
     clear: both;
 }
+
+.modal-window {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+    height: 300px;
+    width: 49%;
+    overflow: visible;
+    background-color: lightgray;
+    border-radius: 0 20px 0 0;
+}
+
+.right-modal-window {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    height: 300px;
+    width: 49%;
+    overflow: visible;
+    background-color: lightgray;
+    border-radius: 20px 0 0 0;
+}
+
+.info-holder {
+    float: left;
+}
