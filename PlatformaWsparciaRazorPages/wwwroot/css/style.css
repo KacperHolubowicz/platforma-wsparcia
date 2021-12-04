@@ -38,6 +38,7 @@ h1.list-header {
 
             .list-for-dispositor table tbody tr td, .list-for-dispositor table thead tr td {
                 padding: 20px 0 20px 23px;
+                overflow: hidden;
             }
 
 .wrapper {
@@ -226,4 +227,149 @@ button.match-button {
     background-color: #f0f0f0;
     border: 1px solid gray;
     margin: 0;
+}
+
+.big-table {
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 2px solid #4075c9;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+    text-align: left;
+}
+
+    .big-table thead {
+        display: block;
+        color: #fefefe;
+        background-color: #4075c9;
+        font-size: large;
+    }
+
+    .big-table tbody {
+        display: block;
+        max-height: 560px;
+        overflow-y: scroll;
+    }
+
+    .big-table td {
+        padding: 23px 0 23px 20px;
+        overflow: hidden;
+    }
+
+    .big-table tbody tr {
+        border-bottom: 1px solid #dedede;
+        background-color: #eeeeff;
+        width: 100%;
+        display: block;
+    }
+
+        .big-table tbody tr:nth-of-type(even) {
+            background-color: #ffffff;
+        }
+
+.people-in-need-id-cell {
+    max-width: 40px;
+    min-width: 40px;
+}
+
+.people-in-need-first-name-cell {
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.people-in-need-location-cell {
+    max-width: 200px;
+    min-width: 200px;
+}
+
+.people-in-need-products-cell {
+    max-width: 350px;
+    min-width: 350px;
+}
+
+.people-in-need-found-help-cell {
+    max-width: 135px;
+    min-width: 135px;
+    text-align: center;
+}
+
+.table-rounder {
+    height: 20px;
+    background-color: #4075c9;
+    border-radius: 0 0 20px 20px;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.half-header {
+    text-align: center;
+}
+
+.matches-id-cell {
+    max-width: 30px;
+    min-width: 30px;
+}
+
+.matches-first-name-cell {
+    max-width: 100px;
+    min-width: 100px;
+}
+
+.matches-last-name-cell {
+    max-width: 110px;
+    min-width: 110px;
+}
+
+.matches-location-cell {
+    max-width: 140px;
+    min-width: 140px;
+}
+
+.left-border {
+    border-left: 1px dashed white;
+}
+
+.bottom-border {
+    border-bottom: 1px dashed white;
+}
+
+.interactive-row:hover {
+    cursor: pointer;
+}
+
+.matches-modal-window {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    height: 50%;
+    width: 1280px;
+    overflow: visible;
+    background-color: #f0f0f0;
+    border: 2px solid gray;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.matches-modal-window .info-holder {
+    overflow-wrap: break-word;
+    width: 240px;
+    float: left;
+}
+
+.matches-modal-window .buttons-holder {
+    align-self: center;
+}
+
+#matches-list {
+    height: 480px;
+}
+
+#wider {
+    width: 480px;
 }
