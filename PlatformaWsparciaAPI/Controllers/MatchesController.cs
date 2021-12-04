@@ -44,7 +44,7 @@ namespace PlatformaWsparciaAPI.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Match>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MatchDTO>))]
         public async Task<IActionResult> GetMatches()
         {
             var matches = await Task.Run(() => dbContext.Matches

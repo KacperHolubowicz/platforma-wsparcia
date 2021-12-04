@@ -16,6 +16,7 @@ namespace PlatformaWsparciaAPI.Data
         public DbSet<LifeSituationClassification> Classifications { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<AdminAccount> AdminAccount { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,16 +55,13 @@ namespace PlatformaWsparciaAPI.Data
                 .HasMany(p => p.Products)
                 .WithOne(p => p.Person);
 
-            modelBuilder.Entity<Product>()
-                .Property(pr => pr.ProductType)
-                .HasConversion(
-                    v => v.ToString(),
-                    v => (ProductType)Enum.Parse(typeof(ProductType), v));
-
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.Donor);
             modelBuilder.Entity<Match>()
                 .HasOne(m => m.PersonInNeed);
+
+            modelBuilder.Entity<AdminAccount>()
+                .HasKey(a => a.ID);
         }
     }
 }
