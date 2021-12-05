@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PlatformaWsparciaAPI.Data;
 using PlatformaWsparciaAPI.Data.DTO;
+using PlatformaWsparciaAPI.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,8 +31,11 @@ namespace PlatformaWsparciaAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProjectDbContext>(options =>
-                options.UseSqlite(@"Data Source = C:\Users\skok2\Desktop\bazadanych.db"));
+                options.UseSqlite(Configuration.GetConnectionString("sqlite")));
+            services.AddScoped<IPriorityService>(sc =>
+                new PriorityService(Configuration["Endpoint"], Configuration["AuthToken"]));
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformaWsparciaAPI", Version = "v1" });
@@ -51,10 +55,12 @@ namespace PlatformaWsparciaAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseCors(builder => builder
-                 .AllowAnyOrigin()
-                 .AllowAnyMethod()
-                 .AllowAnyHeader());
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

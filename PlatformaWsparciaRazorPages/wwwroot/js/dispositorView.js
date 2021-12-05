@@ -2,7 +2,7 @@
 var url = "https://localhost:5001"
 let listOfPeopleInNeed = [
     {
-        'personInNeedID': 4,
+        'personInNeedID': 1,
         'firstName': 'Janusz',
         'lastName': 'Januszewski',
         'contactDetails': {
@@ -41,7 +41,7 @@ let listOfPeopleInNeed = [
         }
     },
     {
-        'personInNeedID': 5,
+        'personInNeedID': 4,
         'firstName': 'Zenon',
         'lastName': 'Zenoniuk',
         'contactDetails': {
@@ -80,7 +80,7 @@ let listOfPeopleInNeed = [
         }
     },
     {
-        'personInNeedID': 6,
+        'personInNeedID': 11,
         'firstName': 'Mirek',
         'lastName': 'Mirkowski',
         'contactDetails': {
@@ -119,7 +119,7 @@ let listOfPeopleInNeed = [
 //mock
 let listOfHelpers = [
     {
-        'donorID': 1,
+        'donorID': 2,
         'firstName': 'Adam',
         'lastName': 'Pomagier',
         'contactDetails': {
@@ -139,7 +139,7 @@ let listOfHelpers = [
         ]
     },
     {
-        'donorID': 2,
+        'donorID': 23,
         'firstName': 'Joanna',
         'lastName': 'Asiowska',
         'contactDetails': {
@@ -163,7 +163,7 @@ let listOfHelpers = [
         ]
     },
     {
-        'donorID': 3,
+        'donorID': 44,
         'firstName': 'Adam',
         'lastName': 'Mickiewicz',
         'contactDetails': {
@@ -187,25 +187,6 @@ let listOfHelpers = [
         ]
     }
 ];
-let getMatches = () => {
-    const get = new XMLHttpRequest();
-    const url = '/points'
-    get.open("GET", url + '/api/donors');
-    get.setRequestHeader("Content-Type", "application/json");
-    get.onreadystatechange = function () {
-        if (get.readyState === XMLHttpRequest.DONE) {
-            var status = get.status;
-            if (status === 0 || (status >= 200 && status < 400)) {
-                allPoints = JSON.parse(get.responseText);
-                for (let i = 0; i < allPoints.length; i++) {
-                    alert(i);
-                }
-            } else {
-                // Oh no! There has been an error with the request!
-            }
-        }
-    };
-}
 
 let chosenPersonInNeed, chosenHelper;
 
@@ -267,45 +248,59 @@ let showPersonInNeed = (personInNeed) => () => {
     document.getElementById('add-person-in-need-from-modal').onclick = addPersonInNeedToMatch(personInNeed);
 };
 
-let loadPeopleInNeed = (peopleInNeed) => {
+let loadPeopleInNeed = () => {
     let observableList = document.getElementById('people-in-need');
+    const getPeopleInNeed = new XMLHttpRequest();
+    const endpoint = '/api/people-in-need'
+    getPeopleInNeed.open("GET", url + endpoint, true);
+    getPeopleInNeed.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    getPeopleInNeed.onreadystatechange = function () {
+        if (getPeopleInNeed.readyState === XMLHttpRequest.DONE) {
+            var status = getPeopleInNeed.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                allPeopleInNeed = JSON.parse(getPeopleInNeed.responseText);
+                for (let i = 0; i < allPeopleInNeed.length; i++) {
+                    let personInNeed = allPeopleInNeed[i];
 
-    for (let i = 0; i < peopleInNeed.length; i++) {
-        let personInNeed = peopleInNeed[i];
+                    let row = document.createElement('tr');
+                    row.className = 'data-row';
 
-        let row = document.createElement('tr');
-        row.className = 'data-row';
+                    let idCell = createTableCell('id-cell', personInNeed.personInNeedID);
 
-        let idCell = createTableCell('id-cell', personInNeed.personInNeedID);
+                    let locationCell = createTableCell(
+                        'location-cell',
+                        personInNeed.personalDetails.postcode + ' ' + personInNeed.personalDetails.town
+                    );
 
-        let locationCell = createTableCell(
-            'location-cell',
-            personInNeed.personalDetails.postcode + ' ' + personInNeed.personalDetails.town
-        );
+                    let priorityCell = createTableCell('priority-cell', personInNeed.lifeSituation.priority);
+                    let buttonsCell = createTableCell('button-cell', '');
 
-        let priorityCell = createTableCell('priority-cell', personInNeed.lifeSituation.priority);
-        let buttonsCell = createTableCell('button-cell', '');
+                    let addButton = document.createElement('button');
+                    addButton.classList = 'app-button';
+                    addButton.innerHTML = 'Add';
+                    addButton.onclick = addPersonInNeedToMatch(personInNeed);
 
-        let addButton = document.createElement('button');
-        addButton.classList = 'app-button';
-        addButton.innerHTML = 'Add';
-        addButton.onclick = addPersonInNeedToMatch(personInNeed);
+                    let showButton = document.createElement('button');
+                    showButton.classList = 'app-button';
+                    showButton.innerHTML = 'Show';
+                    showButton.onclick = showPersonInNeed(personInNeed);
 
-        let showButton = document.createElement('button');
-        showButton.classList = 'app-button';
-        showButton.innerHTML = 'Show';
-        showButton.onclick = showPersonInNeed(personInNeed);
+                    buttonsCell.appendChild(addButton);
+                    buttonsCell.appendChild(showButton);
 
-        buttonsCell.appendChild(addButton);
-        buttonsCell.appendChild(showButton);
+                    row.appendChild(idCell);
+                    row.appendChild(locationCell);
+                    row.appendChild(priorityCell);
+                    row.appendChild(buttonsCell);
 
-        row.appendChild(idCell);
-        row.appendChild(locationCell);
-        row.appendChild(priorityCell);
-        row.appendChild(buttonsCell);
-
-        observableList.appendChild(row);
-    }
+                    observableList.appendChild(row);
+                }
+            } else {
+                alert("WHAT");
+            }
+        }
+    };
+    getPeopleInNeed.send();
 };
 
 let addHelperToMatch = (helper) => () => {
@@ -350,59 +345,73 @@ let isIn = (list, item) => {
 
 let loadHelpers = (helpers) => {
     let helpersTable = document.getElementById('helpers');
+    const getHelpers = new XMLHttpRequest();
+    const endpoint = '/api/donors';
+    getHelpers.open("GET", url + endpoint, true);
+    getHelpers.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    getHelpers.onreadystatechange = function () {
+        if (getHelpers.readyState === XMLHttpRequest.DONE) {
+            var status = getHelpers.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                allHelpers = JSON.parse(getHelpers.responseText);
+                for (let i = 0; i < allHelpers.length; i++) {
+                    let helper = allHelpers[i];
 
-    for (let i = 0; i < helpers.length; i++) {
-        let helper = helpers[i];
+                    let row = document.createElement('tr');
+                    row.className = 'data-row';
 
-        let row = document.createElement('tr');
-        row.className = 'data-row';
+                    let idCell = createTableCell('helper-id-cell', helper.donorID);
 
-        let idCell = createTableCell('helper-id-cell', helper.donorID);
+                    let locationCell = createTableCell(
+                        'helper-location-cell',
+                        helper.personalDetails.postcode + ' ' + helper.personalDetails.town
+                    );
 
-        let locationCell = createTableCell(
-            'helper-location-cell',
-            helper.personalDetails.postcode + ' ' + helper.personalDetails.town
-        );
+                    let oldProductTypes = [];
+                    let offeredProductTypes = '';
 
-        let oldProductTypes = [];
-        let offeredProductTypes = '';
+                    for (let i = 0; i < helper.products.length; i++) {
+                        let prodType = helper.products[i].productType;
 
-        for (let i = 0; i < helper.products.length; i++) {
-            let prodType = helper.products[i].productType;
+                        if (!isIn(oldProductTypes, prodType)) {
+                            if (i !== 0) {
+                                offeredProductTypes += ', ';
+                            }
 
-            if (!isIn(oldProductTypes, prodType)) {
-                if (i !== 0) {
-                    offeredProductTypes += ', ';
+                            offeredProductTypes += prodType;
+                            oldProductTypes.push(prodType);
+                        }
+                    }
+
+                    let productsCell = createTableCell('helper-products-cell', offeredProductTypes);
+                    let actionCell = createTableCell('helper-button-cell', '');
+
+                    let addButton = document.createElement('button');
+                    addButton.classList = 'app-button';
+                    addButton.innerHTML = 'Add';
+                    addButton.onclick = addHelperToMatch(helper);
+
+                    let showButton = document.createElement('button');
+                    showButton.classList = 'app-button';
+                    showButton.innerHTML = 'Show';
+                    showButton.onclick = showHelper(helper);
+
+                    actionCell.appendChild(addButton);
+                    actionCell.appendChild(showButton);
+
+                    row.appendChild(idCell);
+                    row.appendChild(locationCell);
+                    row.appendChild(productsCell);
+                    row.appendChild(actionCell);
+
+                    helpersTable.appendChild(row);
                 }
-
-                offeredProductTypes += prodType;
-                oldProductTypes.push(prodType);
+            } else {
+                // Oh no! There has been an error with the request!
             }
         }
-
-        let productsCell = createTableCell('helper-products-cell', offeredProductTypes);
-        let actionCell = createTableCell('helper-button-cell', '');
-
-        let addButton = document.createElement('button');
-        addButton.classList = 'app-button';
-        addButton.innerHTML = 'Add';
-        addButton.onclick = addHelperToMatch(helper);
-
-        let showButton = document.createElement('button');
-        showButton.classList = 'app-button';
-        showButton.innerHTML = 'Show';
-        showButton.onclick = showHelper(helper);
-
-        actionCell.appendChild(addButton);
-        actionCell.appendChild(showButton);
-
-        row.appendChild(idCell);
-        row.appendChild(locationCell);
-        row.appendChild(productsCell);
-        row.appendChild(actionCell);
-
-        helpersTable.appendChild(row);
-    }
+    };
+    getHelpers.send();
 };
 
 //TODO
@@ -422,9 +431,9 @@ let match = () => {
         if (postmatch.readyState === XMLHttpRequest.DONE) {
             var status = postmatch.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                alert(status);
+                alert(chosenPersonInNeed.lastName + ' ' + chosenHelper.lastName);
             } else {
-                alert("WHAT");
+
             }
         }
     };

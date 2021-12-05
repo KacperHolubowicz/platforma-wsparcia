@@ -18,7 +18,8 @@ namespace PlatformaWsparciaAPI.Data.Mapper
         public static IEnumerable<DonorDTO> MapToDTODonor(this IEnumerable<Person> people)
         {
             return people
-                .Where(person => person.Role == Role.Donor)
+                .Where(person => person.Role == Role.Donor
+                        && !person.Matched)
                 .Select(person => person.MapToDTODonor());
         }
     }

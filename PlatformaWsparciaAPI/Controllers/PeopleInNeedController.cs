@@ -5,6 +5,7 @@ using PlatformaWsparciaAPI.Data;
 using PlatformaWsparciaAPI.Data.DTO;
 using PlatformaWsparciaAPI.Data.Entity;
 using PlatformaWsparciaAPI.Data.Mapper;
+using PlatformaWsparciaAPI.Service;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,10 +17,12 @@ namespace PlatformaWsparciaAPI.Controllers
     public class PeopleInNeedController : ControllerBase
     {
         private readonly ProjectDbContext dbContext;
+        private readonly IPriorityService priorityService;
 
-        public PeopleInNeedController(ProjectDbContext dbContext)
+        public PeopleInNeedController(ProjectDbContext dbContext, IPriorityService priorityService)
         {
             this.dbContext = dbContext;
+            this.priorityService = priorityService;
         }
 
         [HttpGet]
@@ -44,12 +47,13 @@ namespace PlatformaWsparciaAPI.Controllers
         public async Task<IActionResult> GetPersonInNeed(int id)
         {
             var personInNeed = await Task.Run(() => dbContext.People
+                .Where(per => per.PersonID == id && per.Role == Role.PersonInNeed)
                 .Include(per => per.ContactDetails)
                 .Include(per => per.LifeSituation)
                 .Include(per => per.LifeSituationClassification)
                 .Include(per => per.PersonalDetails)
                 .Include(per => per.Products)
-                .SingleOrDefault(per => per.PersonID == id));
+                .FirstOrDefault());
 
             if (personInNeed == null)
             {
@@ -85,13 +89,11 @@ namespace PlatformaWsparciaAPI.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostPersonInNeed([FromBody] PersonInNeedPostDTO personPost)
         {
-            /*
-             * TODO
-             * Komunikacja z modelem klasyfikujacym
-             * i przydzielanie uzyskanego priorytetu
-             */
+            int computedPriority = 
+                await priorityService.GetPriorityAsync(new LifeSituationFullDTO(personPost));
 
             var products = personPost.Products
                 .Select(prod => new Product()
@@ -120,8 +122,7 @@ namespace PlatformaWsparciaAPI.Controllers
                 LifeSituation = new LifeSituation()
                 {
                     Description = personPost.Description,
-                    // TODO zmienic
-                    Priority = 3
+                    Priority = computedPriority
                 },
                 LifeSituationClassification = new LifeSituationClassification()
                 {
