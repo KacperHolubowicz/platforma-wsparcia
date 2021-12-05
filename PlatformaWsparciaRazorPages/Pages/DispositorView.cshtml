@@ -1,0 +1,135 @@
+﻿@page
+@model PlatformaWsparciaRazorPages.Pages.DispositorViewModel
+@{
+}
+
+<div class="wrapper">
+    <div class="list-for-dispositor">
+        <h1 class="list-header"> People in need </h1>
+        <table class="list-for-dispositor-table">
+            <thead>
+                <tr class="table-header">
+                    <td class="id-cell"> ID </td>
+                    <td class="location-cell"> Location </td>
+                    <td class="priority-cell"> Priority</td>
+                    <td class="button-header"> Action </td>
+                </tr>
+            </thead>
+            <tbody class="list-scroll" id="people-in-need"></tbody>
+        </table>
+    </div>
+
+    <div class="list-for-dispositor">
+        <h1 class="list-header"> People eager to help </h1>
+        <table class="list-for-dispositor-table">
+            <thead>
+                <tr class="table-header">
+                    <td class="helper-id-cell"> ID </td>
+                    <td class="helper-location-cell"> Location </td>
+                    <td class="helper-products-cell"> Offers </td>
+                    <td class="helper-button-header"> Action </td>
+                </tr>
+            </thead>
+            <tbody class="list-scroll" id="helpers"></tbody>
+        </table>
+    </div>
+
+    <div class="empty"></div>
+
+    <div class="matcher">
+        <table>
+            <tr>
+                <td class="matcher-person-in-need"> Person in need </td>
+                <td class="matcher-helper"> Helper </td>
+            </tr>
+
+            <tr>
+                <td class="matcher-person-in-need"> - </td>
+                <td class="matcher-helper"> - </td>
+            </tr>
+        </table>
+
+        <button class="match-button" onclick="match()"> Match </button>
+    </div>
+
+    <!--not implemented yet-->
+    <div class="sticker">
+        <button class="nav-button"> Homepage </button>
+        <button class="nav-button"> View matches </button>
+    </div>
+</div>
+
+<div class="modal-window">
+    <div class="info-holder">
+        Personal information:
+        <ul>
+            <li id="in-need-id"></li>
+            <li id="in-need-first-name"></li>
+            <li id="in-need-last-name"></li>
+            <li id="in-need-address"></li>
+            <li id="in-need-town"></li>
+            <li id="in-need-zip-code"></li>
+            <li id="in-need-phone-number"></li>
+            <li id="in-need-email"></li>
+            <li id="in-need-age"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Needed products:
+        <ul id="in-need-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
+        Living conditions:
+        <ul>
+            <li id="in-need-town-population"></li>
+            <li id="in-need-household-size"></li>
+            <li id="in-need-financial-situation"></li>
+            <li id="in-need-health-situation"></li>
+            <li id="in-need-standard-of-living"></li>
+            <li id="in-need-family-situation"></li>
+            <li id="in-need-chronic-illnesses"></li>
+            <li id="in-need-dependence"></li>
+            <li id="in-need-priority"></li>
+        </ul>
+    </div>
+
+    <div class="buttons-holder">
+        <button class="modal-window-button" id="add-person-in-need-from-modal">Add</button>
+        <button class="modal-window-button" onclick="closeModalWindow('modal-window')">X</button>
+    </div>
+
+    <div class="empty"></div>
+    <div id="in-need-description"></div>
+</div>
+
+<div class="right-modal-window">
+    <div class="info-holder">
+        Personal information:
+        <ul>
+            <li id="helper-id"></li>
+            <li id="helper-first-name"></li>
+            <li id="helper-last-name"></li>
+            <li id="helper-phone-number"></li>
+            <li id="helper-email"></li>
+            <li id="helper-town"></li>
+            <li id="helper-zip-code"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Offered products:
+        <ul id="helper-product-list"></ul>
+    </div>
+
+    <div class="buttons-holder">
+        <button class="modal-window-button" id="add-helper-from-modal">Add</button>
+        <button class="modal-window-button" onclick="closeModalWindow('right-modal-window')">X</button>
+    </div>
+
+    <div class="empty"></div>
+</div>
+
+<script src="~/js/dispositorView.js"></script>
+<script>main();</script>

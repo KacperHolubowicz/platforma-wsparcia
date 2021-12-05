@@ -30,7 +30,7 @@ namespace PlatformaWsparciaAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ProjectDbContext>(options =>
-                options.UseSqlite(@"Data Source = C:\Users\01153051\sqlite\baza.db"));
+                options.UseSqlite(@"Data Source = C:\Users\skok2\Desktop\bazadanych.db"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
