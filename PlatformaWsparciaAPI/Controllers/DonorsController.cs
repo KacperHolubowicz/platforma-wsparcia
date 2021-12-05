@@ -41,16 +41,18 @@ namespace PlatformaWsparciaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetDonor(int id)
         {
-            var donor = await dbContext.People
+            var donor = await Task.Run(() => dbContext.People
+                .Where(per => per.PersonID == id && per.Role == Role.Donor)
                 .Include(per => per.ContactDetails)
                 .Include(per => per.PersonalDetails)
                 .Include(per => per.Products)
-                .SingleOrDefaultAsync(per => per.PersonID == id);
+                .FirstOrDefault());
 
             if (donor == null)
             {
                 return NotFound();
             }
+
             DonorDTO donorDTO = donor.MapToDTODonor();
 
             return Ok(donorDTO);
@@ -85,10 +87,8 @@ namespace PlatformaWsparciaAPI.Controllers
                 Products = products,
                 Matched = false
             };
-            donorEntity.Products.ForEach(pr => pr.Person = donorEntity);
 
             await dbContext.People.AddAsync(donorEntity);
-            await dbContext.Products.AddRangeAsync(products);
             await dbContext.SaveChangesAsync();
             return Accepted();
         }

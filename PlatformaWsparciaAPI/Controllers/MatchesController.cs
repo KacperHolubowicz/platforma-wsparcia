@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PlatformaWsparciaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/matches")]
     [ApiController]
     public class MatchesController : ControllerBase
     {
@@ -24,10 +24,20 @@ namespace PlatformaWsparciaAPI.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostMatch([FromBody] MatchPostDTO matchPost)
         {
-            Person donor = dbContext.People.First(per => per.PersonID == matchPost.DonorID);
-            Person personInNeed = dbContext.People.First(per => per.PersonID == matchPost.PersonInNeedID);
+            Person donor = dbContext.People
+                .FirstOrDefault(per => per.PersonID == matchPost.DonorID
+                                && per.Role == Role.Donor);
+            Person personInNeed = dbContext.People
+                .FirstOrDefault(per => per.PersonID == matchPost.PersonInNeedID
+                                && per.Role == Role.PersonInNeed);
+
+            if(donor == null || personInNeed == null)
+            {
+                return BadRequest();
+            }
 
             donor.Matched = true;
             personInNeed.Matched = true;

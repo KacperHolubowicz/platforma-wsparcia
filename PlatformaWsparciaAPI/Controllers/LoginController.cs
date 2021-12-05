@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PlatformaWsparciaAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/login")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -20,7 +20,7 @@ namespace PlatformaWsparciaAPI.Controllers
             this.dbContext = dbContext;
         }
 
-        //TODO zabezpieczyc itp
+        //TODO lepsze
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AdminAccount))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

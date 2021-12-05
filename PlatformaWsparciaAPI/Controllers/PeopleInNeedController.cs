@@ -44,12 +44,13 @@ namespace PlatformaWsparciaAPI.Controllers
         public async Task<IActionResult> GetPersonInNeed(int id)
         {
             var personInNeed = await Task.Run(() => dbContext.People
+                .Where(per => per.PersonID == id && per.Role == Role.PersonInNeed)
                 .Include(per => per.ContactDetails)
                 .Include(per => per.LifeSituation)
                 .Include(per => per.LifeSituationClassification)
                 .Include(per => per.PersonalDetails)
                 .Include(per => per.Products)
-                .SingleOrDefault(per => per.PersonID == id));
+                .FirstOrDefault());
 
             if (personInNeed == null)
             {

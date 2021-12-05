@@ -32,6 +32,7 @@ namespace PlatformaWsparciaAPI
             services.AddDbContext<ProjectDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("sqlite")));
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformaWsparciaAPI", Version = "v1" });
@@ -51,6 +52,11 @@ namespace PlatformaWsparciaAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseAuthorization();
 
