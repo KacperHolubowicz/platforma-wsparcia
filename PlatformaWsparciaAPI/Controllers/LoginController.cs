@@ -20,7 +20,6 @@ namespace PlatformaWsparciaAPI.Controllers
             this.dbContext = dbContext;
         }
 
-        //TODO lepsze
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AdminAccount))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

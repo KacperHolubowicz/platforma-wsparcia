@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PlatformaWsparciaAPI.Data;
 using PlatformaWsparciaAPI.Data.DTO;
+using PlatformaWsparciaAPI.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,8 @@ namespace PlatformaWsparciaAPI
         {
             services.AddDbContext<ProjectDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("sqlite")));
+            services.AddScoped<IPriorityService>(sc =>
+                new PriorityService(Configuration["Endpoint"], Configuration["AuthToken"]));
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
