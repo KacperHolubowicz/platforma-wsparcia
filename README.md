@@ -25,7 +25,7 @@ Dyspozytor może wybierać spośród osób potrzebujących oraz darczyńców w c
 6. Dyspozytor spośród listy osób potrzebujących oraz darczyńców tworzy matche
 
 ## Architektura
-TODO
+![263093239_301640245233885_5062566637273321029_n](https://user-images.githubusercontent.com/93927311/144762969-21b70652-b52b-46c6-bcbc-12481f0e1a2e.png)
 
 ## Stos technologiczny
 - App service
