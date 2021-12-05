@@ -1,0 +1,100 @@
+﻿@page
+@model PlatformaWsparciaRazorPages.Pages.Shared.IndexModel
+@{ }
+
+<div class="sticker">
+    <button class="nav-button"> Homepage </button> <!--NOT IMPLEMENTED-->
+</div>
+
+<div class="wrapper">
+    <table class="big-table">
+        <thead>
+            <tr>
+                <td class="half-header bottom-border" colspan="4" scope="colgroup">Donor</td>
+                <td class="half-header left-border bottom-border" id="wider" colspan="4" scope="colgroup">Needy</td>
+            </tr>
+            <tr>
+                <td class="matches-id-cell"> ID </td>
+                <td class="matches-first-name-cell"> First name </td>
+                <td class="matches-last-name-cell"> Last name </td>
+                <td class="matches-location-cell"> Location </td>
+                <td class="matches-id-cell left-border"> ID </td>
+                <td class="matches-first-name-cell"> First name </td>
+                <td class="matches-last-name-cell"> Last name </td>
+                <td class="matches-location-cell"> Location </td>
+            </tr>
+        </thead>
+
+        <tbody id="matches-list"></tbody>
+    </table>
+
+    <div class="table-rounder"></div>
+</div>
+
+<div class="matches-modal-window">
+    <div class="info-holder">
+        Donor's personal information:
+        <ul>
+            <li id="helper-id"></li>
+            <li id="helper-first-name"></li>
+            <li id="helper-last-name"></li>
+            <li id="helper-phone-number"></li>
+            <li id="helper-email"></li>
+            <li id="helper-town"></li>
+            <li id="helper-zip-code"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Products offered by Donor:
+        <ul id="helper-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
+        Needy's personal information:
+        <ul>
+            <li id="in-need-id"></li>
+            <li id="in-need-first-name"></li>
+            <li id="in-need-last-name"></li>
+            <li id="in-need-address"></li>
+            <li id="in-need-town"></li>
+            <li id="in-need-zip-code"></li>
+            <li id="in-need-phone-number"></li>
+            <li id="in-need-email"></li>
+            <li id="in-need-age"></li>
+        </ul>
+    </div>
+
+    <div class="info-holder">
+        Needed products:
+        <ul id="in-need-product-list"></ul>
+    </div>
+
+    <div class="info-holder">
+        Needy's living conditions:
+        <ul>
+            <li id="in-need-town-population"></li>
+            <li id="in-need-household-size"></li>
+            <li id="in-need-financial-situation"></li>
+            <li id="in-need-health-situation"></li>
+            <li id="in-need-standard-of-living"></li>
+            <li id="in-need-family-situation"></li>
+            <li id="in-need-chronic-illnesses"></li>
+            <li id="in-need-dependence"></li>
+            <li id="in-need-priority"></li>
+        </ul>
+    </div>
+
+    <div class="buttons-holder">
+        <button class="modal-window-button" onclick="closeModalWindow('matches-modal-window')">Close</button>
+    </div>
+
+    <div class="empty"></div>
+
+    <div id="in-need-description"></div>
+</div>
+
+
+<script src="~/js/utilities.js"></script>
+<script src="~/js/matches.js"></script>
+<script>matchesMainFunction();</script>
