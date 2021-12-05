@@ -2,7 +2,7 @@
 var url = "https://localhost:5001"
 let listOfPeopleInNeed = [
     {
-        'personInNeedID': 1,
+        'personInNeedID': 4,
         'firstName': 'Janusz',
         'lastName': 'Januszewski',
         'contactDetails': {
@@ -80,7 +80,7 @@ let listOfPeopleInNeed = [
         }
     },
     {
-        'personInNeedID': 11,
+        'personInNeedID': 6,
         'firstName': 'Mirek',
         'lastName': 'Mirkowski',
         'contactDetails': {
@@ -119,7 +119,7 @@ let listOfPeopleInNeed = [
 //mock
 let listOfHelpers = [
     {
-        'donorID': 15,
+        'donorID': 1,
         'firstName': 'Adam',
         'lastName': 'Pomagier',
         'contactDetails': {
@@ -139,7 +139,7 @@ let listOfHelpers = [
         ]
     },
     {
-        'donorID': 23,
+        'donorID': 2,
         'firstName': 'Joanna',
         'lastName': 'Asiowska',
         'contactDetails': {
@@ -163,7 +163,7 @@ let listOfHelpers = [
         ]
     },
     {
-        'donorID': 44,
+        'donorID': 3,
         'firstName': 'Adam',
         'lastName': 'Mickiewicz',
         'contactDetails': {
@@ -187,6 +187,25 @@ let listOfHelpers = [
         ]
     }
 ];
+let getMatches = () => {
+    const get = new XMLHttpRequest();
+    const url = '/points'
+    get.open("GET", url + '/api/donors');
+    get.setRequestHeader("Content-Type", "application/json");
+    get.onreadystatechange = function () {
+        if (get.readyState === XMLHttpRequest.DONE) {
+            var status = get.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                allPoints = JSON.parse(get.responseText);
+                for (let i = 0; i < allPoints.length; i++) {
+                    alert(i);
+                }
+            } else {
+                // Oh no! There has been an error with the request!
+            }
+        }
+    };
+}
 
 let chosenPersonInNeed, chosenHelper;
 
@@ -393,8 +412,8 @@ let match = () => {
     }
     const postmatch = new XMLHttpRequest();
     const endpoint = '/api/Matches'
-    postmatch.open("POST", url + endpoint);
-    postmatch.setRequestHeader("Content-Type", "application/json");
+    postmatch.open("POST", url + endpoint, true);
+    postmatch.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     var data = JSON.stringify({
         "donorID": chosenHelper.donorID,
         "personInNeedID": chosenPersonInNeed.personInNeedID
@@ -403,7 +422,7 @@ let match = () => {
         if (postmatch.readyState === XMLHttpRequest.DONE) {
             var status = postmatch.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                alert(chosenPersonInNeed.lastName + ' ' + chosenHelper.lastName);
+                alert(status);
             } else {
                 alert("WHAT");
             }
