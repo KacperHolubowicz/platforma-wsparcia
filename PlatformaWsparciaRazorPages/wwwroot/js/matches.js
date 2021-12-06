@@ -162,8 +162,8 @@ let showModalWindow = (helper, needy) => () => {
     insertListItem('in-need-health-situation', 'Health situation (0-4)', lsc.healthSituation);
     insertListItem('in-need-standard-of-living', 'Standard of living (0-4)', lsc.standardOfLiving);
     insertListItem('in-need-family-situation', 'Family situation (0-4)', lsc.familySituation);
-    insertListItem('in-need-chronic-illnesses', 'Chronic illnesses', lsc.chronicIlnesses);
-    insertListItem('in-need-dependence', 'Dependence', lsc.dependence);
+    insertListItem('in-need-chronic-illnesses', 'Chronic illnesses', lsc.chronicIllnesses);
+    insertListItem('in-need-dependence', 'Dependence', lsc.dependece);
     insertListItem('in-need-priority', 'Suggested priority', needy.lifeSituation.priority);
     insertListItem('in-need-description', 'Description', needy.lifeSituation.description);
 
