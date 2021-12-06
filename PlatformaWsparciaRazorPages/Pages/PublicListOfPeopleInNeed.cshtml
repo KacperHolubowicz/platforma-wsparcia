@@ -1,0 +1,31 @@
+﻿@page
+@model PlatformaWsparciaRazorPages.Pages.PublicListOfPeopleInNeedModel
+@{ }
+
+<div class="sticker">
+    <button class="nav-button"> Homepage </button> <!--NOT IMPLEMENTED-->
+</div>
+
+<div class="wrapper">
+    <table class="big-table">
+        <thead>
+            <tr>
+                <td class="people-in-need-id-cell"> ID </td>
+                <td class="people-in-need-first-name-cell"> First name </td>
+                <td class="people-in-need-location-cell"> Location </td>
+                <td class="people-in-need-products-cell"> Products needed </td>
+                <td class="people-in-need-found-help-cell"> Found help </td>
+            </tr>
+        </thead>
+
+        <tbody id="public-list"> </tbody>
+    </table>
+    <div class="table-rounder"></div>
+    <br />
+    <button class="nav-button">Submit Helper</button>
+    <button class="nav-button">Submit Person in Need</button>
+</div>
+
+<script src="~/js/utilities.js"></script>
+<script src="~/js/publicListOfPeopleInNeed.js"></script>
+<script>publicListMainFunction();</script>
