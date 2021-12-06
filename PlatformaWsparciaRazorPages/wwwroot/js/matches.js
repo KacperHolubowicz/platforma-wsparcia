@@ -1,4 +1,5 @@
 ﻿//mock
+var url = "https://localhost:5001"
 let matches = [
     {
         "donor": {
@@ -161,8 +162,8 @@ let showModalWindow = (helper, needy) => () => {
     insertListItem('in-need-health-situation', 'Health situation (0-4)', lsc.healthSituation);
     insertListItem('in-need-standard-of-living', 'Standard of living (0-4)', lsc.standardOfLiving);
     insertListItem('in-need-family-situation', 'Family situation (0-4)', lsc.familySituation);
-    insertListItem('in-need-chronic-illnesses', 'Chronic illnesses', lsc.chronicIlnesses);
-    insertListItem('in-need-dependence', 'Dependence', lsc.dependence);
+    insertListItem('in-need-chronic-illnesses', 'Chronic illnesses', lsc.chronicIllnesses);
+    insertListItem('in-need-dependence', 'Dependence', lsc.dependece);
     insertListItem('in-need-priority', 'Suggested priority', needy.lifeSituation.priority);
     insertListItem('in-need-description', 'Description', needy.lifeSituation.description);
 
@@ -176,52 +177,60 @@ let showModalWindow = (helper, needy) => () => {
     }
 };
 
-let loadMatches = (listOfMatches) => {
+let loadMatches = () => {
     let table = document.getElementById('matches-list');
+    const getmatch = new XMLHttpRequest();
+    const endpoint = '/api/Matches'
+    getmatch.open("GET", url + endpoint, true);
+    getmatch.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    getmatch.onreadystatechange = function () {
+        if (getmatch.readyState === XMLHttpRequest.DONE) {
+            var status = getmatch.status;
+            if (status === 0 || (status >= 200 && status < 400)) {
+                allMatches = JSON.parse(getmatch.responseText);
+                for (let i = 0; i < allMatches.length; i++) {
+                    let helper = allMatches[i].donor;
+                    let personInNeed = allMatches[i].personInNeed;
 
-    for (let i = 0; i < listOfMatches.length; i++) {
-        let helper = listOfMatches[i].donor;
-        let personInNeed = listOfMatches[i].personInNeed;
+                    let row = document.createElement('tr');
+                    row.className = 'interactive-row';
+                    row.onclick = showModalWindow(helper, personInNeed);
 
-        let row = document.createElement('tr');
-        row.className = 'interactive-row';
-        row.onclick = showModalWindow(helper, personInNeed);
+                    let helperIdCell = createTableCell('matches-id-cell', helper.donorID);
+                    let helperFirstNameCell = createTableCell('matches-first-name-cell', helper.firstName);
+                    let helperLastNameCell = createTableCell('matches-last-name-cell', helper.lastName);
+                    let helperLocationCell = createTableCell(
+                        'matches-location-cell',
+                        helper.personalDetails.postcode + ' ' + helper.personalDetails.town
+                    );
 
-        let helperIdCell = createTableCell('matches-id-cell', helper.donorID);
-        let helperFirstNameCell = createTableCell('matches-first-name-cell', helper.firstName);
-        let helperLastNameCell = createTableCell('matches-last-name-cell', helper.lastName);
-        let helperLocationCell = createTableCell(
-            'matches-location-cell',
-            helper.personalDetails.postcode + ' ' + helper.personalDetails.town
-        );
+                    let needyIdCell = createTableCell('matches-id-cell', personInNeed.personInNeedID);
+                    let needyFirstNameCell = createTableCell('matches-first-name-cell', personInNeed.firstName);
+                    let needyLastNameCell = createTableCell('matches-last-name-cell', personInNeed.lastName);
+                    let needyLocationCell = createTableCell(
+                        'matches-location-cell',
+                        personInNeed.personalDetails.postcode + ' ' + personInNeed.personalDetails.town
+                    );
 
-        let needyIdCell = createTableCell('matches-id-cell', personInNeed.personInNeedID);
-        let needyFirstNameCell = createTableCell('matches-first-name-cell', personInNeed.firstName);
-        let needyLastNameCell = createTableCell('matches-last-name-cell', personInNeed.lastName);
-        let needyLocationCell = createTableCell(
-            'matches-location-cell',
-            personInNeed.personalDetails.postcode + ' ' + personInNeed.personalDetails.town
-        );
+                    row.appendChild(helperIdCell);
+                    row.appendChild(helperFirstNameCell);
+                    row.appendChild(helperLastNameCell);
+                    row.appendChild(helperLocationCell);
+                    row.appendChild(needyIdCell);
+                    row.appendChild(needyFirstNameCell);
+                    row.appendChild(needyLastNameCell);
+                    row.appendChild(needyLocationCell);
 
-        row.appendChild(helperIdCell);
-        row.appendChild(helperFirstNameCell);
-        row.appendChild(helperLastNameCell);
-        row.appendChild(helperLocationCell);
-        row.appendChild(needyIdCell);
-        row.appendChild(needyFirstNameCell);
-        row.appendChild(needyLastNameCell);
-        row.appendChild(needyLocationCell);
+                    table.appendChild(row);
+                }
+            } else {
 
-        table.appendChild(row);
-    }
+            }
+        }
+    };
+    getmatch.send();
 };
 
 let matchesMainFunction = () => {
-
-    //mock
-    for (let i = 0; i < 37; i++) {
-        matches.push(matches[i % 2]);
-    }
-
-    loadMatches(matches);
+    loadMatches();
 };

@@ -1,0 +1,141 @@
+@page
+@model PlatformaWsparciaRazorPages.Pages.AddNeedyModel
+@{  }
+
+<div class="sticker">
+    <button class="nav-button"> Homepage </button> <!--NOT IMPLEMENTED-->
+</div>
+
+<div class="wrapper">
+    <form>
+        <h2>Information about Person in need</h2>
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname"><br>
+        <p>Contact Details</p>
+        <label for="phonenumber">Phone Number:</label>
+        <input type="text" id="pnumber" name="pnumber"><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br>
+        <p>Personal Information</p>
+        <label for="town">Town:</label>
+        <input type="text" id="town" name="town"><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br>
+        <label for="postcode">PostCode:</label>
+        <input type="text" id="postcode" name="postcode"><br>
+        <div class="productList">
+            <p>Products</p>
+            <label for="productType1">Product Type:</label>
+            <select class="productType" name="productType1">
+                <option value="Financial support">Financial Support</option>
+                <option value="Food pruducts">Food Product</option>
+                <option value="Medical products">Medical Product</option>
+                <option value="Chemical products">Chemical Product</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Others">Others</option>
+            </select>
+            <br />
+            <label for="productName1">Product Name:</label>
+            <input type="text" name="productName1" class="productName"><br>
+        </div>
+        <input type="button" onclick="addProduct()" id="addproductbutton" value="Add product"><br><br>
+        <p>Life Situation</p>
+        <textarea id="desc" name="desc" rows="4" cols="50"></textarea><br><br>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+        <div>
+            <label for="healthsituation">Health situation (0 - Very Bad, 4 - Very Good):</label><br>
+            <input type="radio" id="hs0"
+                   name="healthsituation" value=0>
+            <label for="hs0">0</label>
+            <input type="radio" id="hs1"
+                   name="healthsituation" value=1>
+            <label for="hs1">1</label>
+            <input type="radio" id="hs2"
+                   name="healthsituation" value=2>
+            <label for="hs2">2</label>
+            <input type="radio" id="hs3"
+                   name="healthsituation" value=3>
+            <label for="hs3">3</label>
+            <input type="radio" id="hs4"
+                   name="healthsituation" value=4>
+            <label for="hs4">4</label>
+        </div>
+        <div>
+            <label for="standardOfLiving">Standard of living (0 - Very Bad, 4 - Very Good):</label><br>
+            <input type="radio" id="sol0"
+                   name="standardOfLiving" value=0>
+            <label for="sol0">0</label>
+            <input type="radio" id="sol1"
+                   name="standardOfLiving" value=1>
+            <label for="sol1">1</label>
+            <input type="radio" id="sol2"
+                   name="standardOfLiving" value=2>
+            <label for="sol2">2</label>
+            <input type="radio" id="sol3"
+                   name="standardOfLiving" value=3>
+            <label for="sol3">3</label>
+            <input type="radio" id="sol4"
+                   name="standardOfLiving" value=4>
+            <label for="sol4">4</label>
+        </div>
+        <div>
+            <label for="familySituation">Family Situation (0 - Very Bad, 4 - Very Good):</label><br>
+            <input type="radio" id="fs0"
+                   name="familySituation" value=0>
+            <label for="fs0">0</label>
+            <input type="radio" id="fs1"
+                   name="familySituation" value=1>
+            <label for="fs1">1</label>
+            <input type="radio" id="fs2"
+                   name="familySituation" value=2>
+            <label for="fs2">2</label>
+            <input type="radio" id="fs3"
+                   name="familySituation" value=3>
+            <label for="fs3">3</label>
+            <input type="radio" id="fs4"
+                   name="familySituation" value=4>
+            <label for="fs4">4</label>
+        </div>
+        <div>
+            <label for="population">Population of town:</label>
+            <select class="population" name="population">
+                <option value=0>Less than 1000 people</option>
+                <option value=1>1000 - 10000</option>
+                <option value=2>10000 - 100000</option>
+                <option value=3>100000 - 1000000</option>
+                <option value=4>More than 1 million people</option>
+            </select>
+        </div>
+        <label for="household">Household size:</label>
+        <input type="number" id="household" name="household"><br>
+        <label for="income">Income per family member:</label>
+        <input type="number" id="income" name="income"><br>
+        <div>
+            <label for="cronicIllness">Does the person have cronic illnesses?:</label><br>
+            <input type="radio" id="ci1"
+                   name="cronicIllness" value=true>
+            <label for="fs0">Yes</label>
+            <input type="radio" id="ci0"
+                   name="cronicIllness" value=false>
+            <label for="fs1">No</label>
+        </div>
+        <div>
+            <label for="dependence">Is person dependent on another person?:</label><br>
+            <input type="radio" id="d1"
+                   name="dependence" value=true>
+            <label for="d1">Yes</label>
+            <input type="radio" id="d0"
+                   name="dependence" value=false>
+            <label for="d0">No</label>
+        </div>
+    </form>
+    <br />
+    <button onclick="addPerson()" id="submitButton">Submit</button>
+</div>
+
+<script src="~/js/utilities.js"></script>
+<script src="~/js/addneedy.js"></script>
+<script>publicListMainFunction();</script>
