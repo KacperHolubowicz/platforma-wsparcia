@@ -411,11 +411,11 @@ div.needy-form-right-div {
 }
 
 .needy-form-right-div input {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .needy-form-right-div select {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .productList {
@@ -427,9 +427,7 @@ div.needy-form-right-div {
 .needy-form-radio {
     width: 480px;
     margin-top: 20px;
-    /*padding-right: 40px;*/
     float: left;
-    /*background-color: red;*/
 }
 
 
@@ -451,4 +449,32 @@ div.needy-form-right-div {
 
 .input-class {
     width: 190px;
+}
+
+.helper-form-wrapper {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.helper-form-wrapper input {
+    margin-bottom: 20px;
+}
+
+    .helper-form-wrapper select {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+.helper-form-basic-info {
+    width: 200px;
+    text-align: left;
+    float: left;
+}
+
+.helper-form-products {
+    width: 200px;
+    text-align: left;
+    float: left;
 }

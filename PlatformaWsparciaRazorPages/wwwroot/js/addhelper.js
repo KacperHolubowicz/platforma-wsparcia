@@ -1,4 +1,4 @@
-var url = "https://localhost:5001"
+var url = "https://platformawsparciaapi.azurewebsites.net";
 
 let addProduct = () => {
     document.getElementsByClassName('productList')[0].innerHTML += '<br><label for="productType1">Product Type:</label>             <select class="productType" name="productType1">                 <option value="Financial support">Financial Support</option>                 <option value="Food pruducts">Food Product</option>                 <option value="Medical products">Medical Product</option>                 <option value="Chemical products">Chemical Product</option>                 <option value="Clothes">Clothes</option>                 <option value="Others">Others</option>             </select>             <br/>             <label for="productName1">Product Name:</label>             <input type="text" name="productName1" class="productName"><br>';

@@ -1,5 +1,5 @@
 ﻿//mock
-var url = "https://localhost:5001"
+var url = "https://platformawsparciaapi.azurewebsites.net";
 let listOfPeopleInNeed = [
     {
         'personInNeedID': 1,

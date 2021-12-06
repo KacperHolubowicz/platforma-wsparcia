@@ -1,4 +1,4 @@
-var url = "https://localhost:5001"
+var url = "https://platformawsparciaapi.azurewebsites.net";
 
 let addProduct = () => {
     let prodList = document.getElementsByClassName('productList')[0];
