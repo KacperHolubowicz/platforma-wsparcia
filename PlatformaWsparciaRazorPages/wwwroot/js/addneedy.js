@@ -4,13 +4,15 @@ let addProduct = () => {
     document.getElementsByClassName('productList')[0].innerHTML += '<br><label for="productType1">Product Type:</label>             <select class="productType" name="productType1">                 <option value="Financial support">Financial Support</option>                 <option value="Food pruducts">Food Product</option>                 <option value="Medical products">Medical Product</option>                 <option value="Chemical products">Chemical Product</option>                 <option value="Clothes">Clothes</option>                 <option value="Others">Others</option>             </select>             <br/>             <label for="productName1">Product Name:</label>             <input type="text" name="productName1" class="productName"><br>';
 }
 
-let addhelper = () => {
+let addPerson = () => {
     const Http = new XMLHttpRequest();
-    const endpoint = '/api/donors'
+    const endpoint = '/api/people-in-need'
     Http.open("POST", url + endpoint, true);
     Http.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+    var ci = document.querySelector('input[name="cronicIllness"]:checked').value == 'true' ? true : false;
+    var d = document.querySelector('input[name="dependence"]:checked').value == 'true' ? true : false;
     var data = JSON.stringify({
-        
+
         "firstName": document.getElementById("fname").value,
         "lastName": document.getElementById("lname").value,
         "contactDetails": {
@@ -24,8 +26,20 @@ let addhelper = () => {
         },
         "products": [
             
-        ]
-        
+        ],
+        "description": document.getElementById("desc").value,
+        "lifeSituationClassification": {
+            "age": document.getElementById("age").value,
+            "townPopulation": document.getElementsByClassName('population')[0].value,
+            "householdSize": document.getElementById("household").value,
+            "financialSituation": document.getElementById("income").value,
+            "healthSituation": document.querySelector('input[name="healthsituation"]:checked').value,
+            "standardOfLiving": document.querySelector('input[name="standardOfLiving"]:checked').value,
+            "familySituation": document.querySelector('input[name="familySituation"]:checked').value,
+            "chronicIllnesses": ci,
+            "dependece": d
+        }
+
     });
     var obj = JSON.parse(data);
     var types = document.getElementsByClassName('productType');
