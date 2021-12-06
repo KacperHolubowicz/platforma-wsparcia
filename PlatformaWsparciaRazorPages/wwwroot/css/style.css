@@ -356,17 +356,17 @@ button.match-button {
     overflow-y: auto;
 }
 
-.matches-modal-window .info-holder {
-    overflow-wrap: break-word;
-    width: 240px;
-    padding-left: 20px;
-    float: left;
-}
+    .matches-modal-window .info-holder {
+        overflow-wrap: break-word;
+        width: 240px;
+        padding-left: 20px;
+        float: left;
+    }
 
-.matches-modal-window .buttons-holder {
-    align-self: center;
-    width: 50px;
-}
+    .matches-modal-window .buttons-holder {
+        align-self: center;
+        width: 50px;
+    }
 
 #matches-list {
     height: 480px;
@@ -374,4 +374,81 @@ button.match-button {
 
 #wider {
     width: 480px;
+}
+
+.form-wrapper {
+    width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    text-align: center;
+}
+
+.needy-form-basic-info {
+    width: 300px;
+    margin-top: 20px;
+    text-align: left;
+    float: left;
+}
+
+    .needy-form-basic-info label {
+        padding: 0px;
+    }
+
+    .needy-form-basic-info input {
+        width: 200px;
+        margin-bottom: 10px;
+    }
+
+    .needy-form-basic-info p {
+        margin-top: 30px;
+    }
+
+div.needy-form-right-div {
+    width: 300px;
+    text-align: left;
+    float: left;
+}
+
+.needy-form-right-div input {
+    margin-bottom: 30px;
+}
+
+.needy-form-right-div select {
+    margin-bottom: 30px;
+}
+
+.productList {
+}
+
+.needy-form-life-situation {
+}
+
+.needy-form-radio {
+    width: 480px;
+    margin-top: 20px;
+    /*padding-right: 40px;*/
+    float: left;
+    /*background-color: red;*/
+}
+
+
+    .needy-form-radio input {
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+    .needy-form-radio select {
+        width: 200px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+
+
+.text-in-radio {
+    text-align: left;
+}
+
+.input-class {
+    width: 190px;
 }

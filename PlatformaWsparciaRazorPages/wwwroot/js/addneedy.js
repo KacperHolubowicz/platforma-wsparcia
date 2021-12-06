@@ -1,8 +1,40 @@
 var url = "https://localhost:5001"
 
 let addProduct = () => {
-    document.getElementsByClassName('productList')[0].innerHTML += '<br><label for="productType1">Product Type:</label>             <select class="productType" name="productType1">                 <option value="Financial support">Financial Support</option>                 <option value="Food pruducts">Food Product</option>                 <option value="Medical products">Medical Product</option>                 <option value="Chemical products">Chemical Product</option>                 <option value="Clothes">Clothes</option>                 <option value="Others">Others</option>             </select>             <br/>             <label for="productName1">Product Name:</label>             <input type="text" name="productName1" class="productName"><br>';
-}
+    let prodList = document.getElementsByClassName('productList')[0];
+
+    let prodLabel = document.createElement('label');
+    prodLabel.setAttribute('for', 'productType1');
+    prodLabel.innerHTML = 'Product Type';
+
+    let prodSelect = document.createElement('select');
+    prodLabel.setAttribute('name', 'productType1');
+    prodSelect.className = 'productType';
+
+    let optValues = ['Financial support', 'Food pruducts', 'Medical products', 'Chemical products', 'Clothes', 'Others'];
+    let optHTMLs = ['Financial Support', 'Food Product', 'Medical Product', 'Chemical Product', 'Clothes', 'Others'];
+
+    for (let i = 0; i < 6; i++) {
+        let opt = document.createElement('option');
+        opt.setAttribute('value', optValues[i]);
+        opt.innerHTML = optHTMLs[i];
+        prodSelect.appendChild(opt);
+    }
+
+    let anotherProdLabel = document.createElement('label');
+    anotherProdLabel.setAttribute('for', 'productName1');
+    anotherProdLabel.innerHTML = 'ProductName';
+
+    let prodInput = document.createElement('input');
+    prodInput.setAttribute('type', 'text');
+    prodInput.setAttribute('name', 'productName1');
+    prodInput.className = 'productName';
+
+    prodList.appendChild(prodLabel);
+    prodList.appendChild(prodSelect);
+    prodList.appendChild(anotherProdLabel);
+    prodList.appendChild(prodInput);
+};
 
 let addPerson = () => {
     const Http = new XMLHttpRequest();
@@ -25,7 +57,7 @@ let addPerson = () => {
             "postcode": document.getElementById("postcode").value
         },
         "products": [
-            
+
         ],
         "description": document.getElementById("desc").value,
         "lifeSituationClassification": {
