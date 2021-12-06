@@ -38,7 +38,7 @@ let addhelper = () => {
         if (Http.readyState === XMLHttpRequest.DONE) {
             var status = Http.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                alert("Thanks for helping us!");
+                window.location.replace('https://platformawsparciawww.azurewebsites.net/');
             } else {
                 // Oh no! There has been an error with the request!
             }

@@ -263,7 +263,7 @@ let match = () => {
         if (postmatch.readyState === XMLHttpRequest.DONE) {
             var status = postmatch.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                alert(chosenPersonInNeed.lastName + ' ' + chosenHelper.lastName);
+                alert('Match has been done.');
             } else {
 
             }

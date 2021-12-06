@@ -1,41 +1,5 @@
 var url = "https://platformawsparciaapi.azurewebsites.net";
 
-let addProduct = () => {
-    let prodList = document.getElementsByClassName('productList')[0];
-
-    let prodLabel = document.createElement('label');
-    prodLabel.setAttribute('for', 'productType1');
-    prodLabel.innerHTML = 'Product Type';
-
-    let prodSelect = document.createElement('select');
-    prodLabel.setAttribute('name', 'productType1');
-    prodSelect.className = 'productType';
-
-    let optValues = ['Financial support', 'Food pruducts', 'Medical products', 'Chemical products', 'Clothes', 'Others'];
-    let optHTMLs = ['Financial Support', 'Food Product', 'Medical Product', 'Chemical Product', 'Clothes', 'Others'];
-
-    for (let i = 0; i < 6; i++) {
-        let opt = document.createElement('option');
-        opt.setAttribute('value', optValues[i]);
-        opt.innerHTML = optHTMLs[i];
-        prodSelect.appendChild(opt);
-    }
-
-    let anotherProdLabel = document.createElement('label');
-    anotherProdLabel.setAttribute('for', 'productName1');
-    anotherProdLabel.innerHTML = 'ProductName';
-
-    let prodInput = document.createElement('input');
-    prodInput.setAttribute('type', 'text');
-    prodInput.setAttribute('name', 'productName1');
-    prodInput.className = 'productName';
-
-    prodList.appendChild(prodLabel);
-    prodList.appendChild(prodSelect);
-    prodList.appendChild(anotherProdLabel);
-    prodList.appendChild(prodInput);
-};
-
 let addPerson = () => {
     const Http = new XMLHttpRequest();
     const endpoint = '/api/people-in-need'
@@ -84,7 +48,7 @@ let addPerson = () => {
         if (Http.readyState === XMLHttpRequest.DONE) {
             var status = Http.status;
             if (status === 0 || (status >= 200 && status < 400)) {
-                alert("Thanks for helping us!");
+                window.location.replace('https://platformawsparciawww.azurewebsites.net/');
             } else {
                 // Oh no! There has been an error with the request!
             }

@@ -225,8 +225,11 @@ button.match-button {
 
 .nav-button {
     background-color: #f0f0f0;
-    border: 1px solid gray;
+    border: 1px solid #fefefe;
     margin: 0;
+    text-decoration: none;
+    color: #fefefe;
+    background-color: #4075c9;
 }
 
 .big-table {
@@ -249,8 +252,8 @@ button.match-button {
 
     .big-table tbody {
         display: block;
-        max-height: 560px;
-        min-height: 560px;
+        max-height: 500px;
+        min-height: 500px;
         overflow-y: scroll;
     }
 
