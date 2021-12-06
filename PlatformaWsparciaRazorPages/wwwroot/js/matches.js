@@ -1,129 +1,5 @@
 ﻿//mock
 var url = "https://platformawsparciaapi.azurewebsites.net";
-let matches = [
-    {
-        "donor": {
-            "donorID": 12,
-            "firstName": "Kazimierz",
-            "lastName": "Pomocny",
-            "contactDetails": {
-                "phoneNumber": "212593847",
-                "email": "kazik@hehe.xd"
-            },
-            "personalDetails": {
-                "town": "Wrocław",
-                "address": "Fajna 203",
-                "postcode": "12-516"
-            },
-            "products": [
-                {
-                    "productType": "nieAlkohol",
-                    "productName": "beer"
-                }
-            ]
-        },
-        "personInNeed": {
-            "personInNeedID": 2,
-            "firstName": "Ferdynand",
-            "lastName": "Świetny",
-            "contactDetails": {
-                "phoneNumber": "293847",
-                "email": "ferdek@hehe.xd"
-            },
-            "personalDetails": {
-                "town": "Wrocław",
-                "address": "Ćwiartki 3/4",
-                "postcode": "12-515"
-            },
-            "products": [
-                {
-                    "productType": "nieAlkohol",
-                    "productName": "beer"
-                },
-                {
-                    "productType": "other",
-                    "productName": "TV"
-                }
-            ],
-            "lifeSituation": {
-                "description": "W tym kraju nie ma pracy dla ludzi z moim wykształceniem :(",
-                "priority": 3
-            },
-            "lifeSituationClassification": {
-                "age": 55,
-                "townPopulation": 4,
-                "householdSize": 3,
-                "financialSituation": 2,
-                "healthSituation": 1,
-                "standardOfLiving": 0,
-                "familySituation": 1,
-                "chronicIllnesses": false,
-                "dependece": true
-            }
-        }
-    },
-    {
-        "donor": {
-            "donorID": 79,
-            "firstName": "Jan",
-            "lastName": "Pomocan",
-            "contactDetails": {
-                "phoneNumber": "997",
-                "email": "wawdawf@jwfaj"
-            },
-            "personalDetails": {
-                "town": "Suwałki",
-                "address": "Asfaltowa 1",
-                "postcode": "55-331"
-            },
-            "products": [
-                {
-                    "productType": "medicine",
-                    "productName": "APAP"
-                },
-                {
-                    "productType": "medicine",
-                    "productName": "Vitamins"
-                }
-            ]
-        },
-        "personInNeed": {
-            "personInNeedID": 12,
-            "firstName": "Andrzeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeej",
-            "lastName": "Inneed",
-            "contactDetails": {
-                "phoneNumber": "012434",
-                "email": ""
-            },
-            "personalDetails": {
-                "town": "Białystok",
-                "address": "Edukacyjna 12",
-                "postcode": "42-710"
-            },
-            "products": [
-                {
-                    "productType": "medicine",
-                    "productName": "vitamins"
-                }
-            ],
-            "lifeSituation": {
-                "description": "Ich brauche Vitaminen!!!",
-                "priority": 2
-            },
-            "lifeSituationClassification": {
-                "age": 49,
-                "townPopulation": 3,
-                "householdSize": 3,
-                "financialSituation": 2,
-                "healthSituation": 3,
-                "standardOfLiving": 3,
-                "familySituation": 4,
-                "chronicIllnesses": false,
-                "dependece": false
-            }
-        }
-    }
-];
 
 let showModalWindow = (helper, needy) => () => {
     document.getElementsByClassName('matches-modal-window')[0].style.display = 'block';
@@ -188,7 +64,9 @@ let loadMatches = () => {
             var status = getmatch.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 allMatches = JSON.parse(getmatch.responseText);
-                for (let i = 0; i < allMatches.length; i++) {
+                let i;
+
+                for (i = 0; i < allMatches.length; i++) {
                     let helper = allMatches[i].donor;
                     let personInNeed = allMatches[i].personInNeed;
 
@@ -223,6 +101,14 @@ let loadMatches = () => {
 
                     table.appendChild(row);
                 }
+
+                while (i < 0) {
+                    let emptyRow = document.createElement('tr');
+                    emptyRow.className = 'interactive-row';
+                    table.appendChild(emptyRow);
+                    i++;
+                }
+
             } else {
 
             }

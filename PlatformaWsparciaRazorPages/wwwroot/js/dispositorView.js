@@ -1,193 +1,5 @@
 ﻿//mock
 var url = "https://platformawsparciaapi.azurewebsites.net";
-let listOfPeopleInNeed = [
-    {
-        'personInNeedID': 1,
-        'firstName': 'Janusz',
-        'lastName': 'Januszewski',
-        'contactDetails': {
-            'phoneNumber': '2134234',
-            'email': 'adwa@dwa',
-        },
-        'personalDetails': {
-            'town': 'Wrocław',
-            'address': 'Szkolna',
-            'postcode': '00-234'
-        },
-        'products': [
-            {
-                'productType': 'food',
-                'productName': 'boorgir'
-            },
-            {
-                'productType': 'other',
-                'productName': 'toothpaste'
-            }
-        ],
-        'lifeSituation': {
-            'description': 'ribfuabduwavbfueawyvfyweavfywaevf',
-            'priority': 3
-        },
-        'lifeSituationClassification': {
-            'age': 44,
-            'townPopulation': 123,
-            'householdSize': 40,
-            'financialSituation': 3,
-            'healthSituation': 3,
-            'standardOfLiving': 3,
-            'familySituation': 3,
-            'chronicIlnesses': false,
-            'dependence': true
-        }
-    },
-    {
-        'personInNeedID': 4,
-        'firstName': 'Zenon',
-        'lastName': 'Zenoniuk',
-        'contactDetails': {
-            'phoneNumber': '0123798',
-            'email': 'zenus@ayaya',
-        },
-        'personalDetails': {
-            'town': 'Warsaw',
-            'address': 'Emilii Plater 9999',
-            'postcode': '00-204'
-        },
-        'products': [
-            {
-                'productType': 'food',
-                'productName': 'pizzah'
-            },
-            {
-                'productType': 'food',
-                'productName': 'tea'
-            }
-        ],
-        'lifeSituation': {
-            'description': 'ribfuabiiiiiiiiiiiiiiiiiiiwaevf',
-            'priority': 1
-        },
-        'lifeSituationClassification': {
-            'age': 29,
-            'townPopulation': 2000000,
-            'householdSize': 40,
-            'financialSituation': 4,
-            'healthSituation': 4,
-            'standardOfLiving': 3,
-            'familySituation': 2,
-            'chronicIlnesses': false,
-            'dependence': false
-        }
-    },
-    {
-        'personInNeedID': 11,
-        'firstName': 'Mirek',
-        'lastName': 'Mirkowski',
-        'contactDetails': {
-            'phoneNumber': '78634765',
-            'email': 'miro@ehehe.z',
-        },
-        'personalDetails': {
-            'town': 'Berlin',
-            'address': 'Einstrasse 42',
-            'postcode': '07-001'
-        },
-        'products': [
-            {
-                'productType': 'other',
-                'productName': 'tissues'
-            }
-        ],
-        'lifeSituation': {
-            'description': 'ribfuabduwavbfueawyvfyweavfywaevf',
-            'priority': 3
-        },
-        'lifeSituationClassification': {
-            'age': 48,
-            'townPopulation': 9876543,
-            'householdSize': 50,
-            'financialSituation': 4,
-            'healthSituation': 2,
-            'standardOfLiving': 4,
-            'familySituation': 5,
-            'chronicIlnesses': true,
-            'dependence': false
-        }
-    }
-];
-
-//mock
-let listOfHelpers = [
-    {
-        'donorID': 2,
-        'firstName': 'Adam',
-        'lastName': 'Pomagier',
-        'contactDetails': {
-            'phoneNumber': '241234234',
-            'email': 'xd@quantum.q'
-        },
-        'personalDetails': {
-            'town': 'Vladivoshtock',
-            'address': 'Vladimirova 67',
-            'postcode': '30-921'
-        },
-        'products': [
-            {
-                'productType': 'food',
-                'productName': 'meat'
-            }
-        ]
-    },
-    {
-        'donorID': 23,
-        'firstName': 'Joanna',
-        'lastName': 'Asiowska',
-        'contactDetails': {
-            'phoneNumber': '44444555',
-            'email': 'coo@haha.com'
-        },
-        'personalDetails': {
-            'town': 'Talin',
-            'address': 'street 234',
-            'postcode': '11-279'
-        },
-        'products': [
-            {
-                'productType': 'medicine',
-                'productName': 'ABC'
-            },
-            {
-                'productType': 'food',
-                'productName': 'spaghetti code'
-            }
-        ]
-    },
-    {
-        'donorID': 44,
-        'firstName': 'Adam',
-        'lastName': 'Mickiewicz',
-        'contactDetails': {
-            'phoneNumber': '4014',
-            'email': 'konrad@dziady.lt'
-        },
-        'personalDetails': {
-            'town': 'Wilno',
-            'address': 'Soplicowska 44',
-            'postcode': '44-404'
-        },
-        'products': [
-            {
-                'productType': 'books',
-                'productName': 'Dziady cz. 3'
-            },
-            {
-                'productType': 'books',
-                'productName': 'Pan Tadeusz'
-            }
-        ]
-    }
-];
-
 let chosenPersonInNeed, chosenHelper;
 
 let createTableCell = (className, innerHTML) => {
@@ -251,7 +63,7 @@ let showPersonInNeed = (personInNeed) => () => {
 let loadPeopleInNeed = () => {
     let observableList = document.getElementById('people-in-need');
     const getPeopleInNeed = new XMLHttpRequest();
-    const endpoint = '/api/people-in-need'
+    const endpoint = '/api/people-in-need';
     getPeopleInNeed.open("GET", url + endpoint, true);
     getPeopleInNeed.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
     getPeopleInNeed.onreadystatechange = function () {
@@ -259,7 +71,9 @@ let loadPeopleInNeed = () => {
             var status = getPeopleInNeed.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 allPeopleInNeed = JSON.parse(getPeopleInNeed.responseText);
-                for (let i = 0; i < allPeopleInNeed.length; i++) {
+                let i;
+
+                for (i = 0; i < allPeopleInNeed.length; i++) {
                     let personInNeed = allPeopleInNeed[i];
 
                     let row = document.createElement('tr');
@@ -294,12 +108,21 @@ let loadPeopleInNeed = () => {
                     row.appendChild(buttonsCell);
 
                     observableList.appendChild(row);
+
+                    while (i < 0) {
+                        let emptyRow = document.createElement('tr');
+                        emptyRow.className = 'data-row';
+                        observableList.appendChild(emptyRow);
+                        i++;
+                    }
                 }
+
             } else {
                 alert("WHAT");
             }
         }
     };
+
     getPeopleInNeed.send();
 };
 
@@ -354,7 +177,9 @@ let loadHelpers = (helpers) => {
             var status = getHelpers.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 allHelpers = JSON.parse(getHelpers.responseText);
-                for (let i = 0; i < allHelpers.length; i++) {
+                let i;
+
+                for (i = 0; i < allHelpers.length; i++) {
                     let helper = allHelpers[i];
 
                     let row = document.createElement('tr');
@@ -406,6 +231,14 @@ let loadHelpers = (helpers) => {
 
                     helpersTable.appendChild(row);
                 }
+
+                while (i < 0) {
+                    let emptyRow = document.createElement('tr');
+                    emptyRow.className = 'data-row';
+                    helpersTable.appendChild(emptyRow);
+                    i++;
+                }
+
             } else {
                 // Oh no! There has been an error with the request!
             }
@@ -443,17 +276,6 @@ let match = () => {
 let closeModalWindow = (className) => document.getElementsByClassName(className)[0].style.display = 'none';
 
 let main = () => {
-
-    //mock
-    for (let i = 0; i < 100; i++) {
-        listOfPeopleInNeed.push(listOfPeopleInNeed[i % 3]);
-    }
-
-    //mock
-    for (let i = 0; i < 20; i++) {
-        listOfHelpers.push(listOfHelpers[i % 3]);
-    }
-
-    loadPeopleInNeed(listOfPeopleInNeed);
-    loadHelpers(listOfHelpers);
+    loadPeopleInNeed();
+    loadHelpers();
 };

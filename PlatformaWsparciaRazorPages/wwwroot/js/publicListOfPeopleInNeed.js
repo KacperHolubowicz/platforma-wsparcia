@@ -1,49 +1,5 @@
 ﻿//mock
 var url = "https://platformawsparciaapi.azurewebsites.net";
-let listOfPeopleInNeed = [
-    {
-        'personInNeedID': 20,
-        'firstName': 'Mirek',
-        'matched': false,
-        'town': 'Vladivoshtock',
-        'postcode': '05-100',
-        'products': [
-            {
-                'productType': 'food',
-                'productName': 'botteled water'
-            },
-            {
-                'productType': 'food',
-                'productName': 'vodka'
-            },
-            {
-                'productType': 'food',
-                'productName': 'cucumbers'
-            },
-            {
-                'productType': 'medicine',
-                'productName': 'penicilin'
-            }
-        ]
-    },
-    {
-        'personInNeedID': 55,
-        'firstName': 'Adrian',
-        'matched': true,
-        'town': 'Suwałki',
-        'postcode': '67-202',
-        'products': [
-            {
-                'productType': 'food',
-                'productName': 'butter'
-            },
-            {
-                'productType': 'yes',
-                'productName': 'toothpaste'
-            }
-        ]
-    }
-];
 
 let getProductList = (person) => {
     let products = person.products;
@@ -71,8 +27,10 @@ let loadPeopleInNeed = () => {
             var status = getpeople.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 allpeople = JSON.parse(getpeople.responseText);
-                for (let i = 0; i < allpeople.length; i++) {
-                    let table = document.getElementById('public-list');
+                let i;
+
+                for (i = 0; i < allpeople.length; i++) {
+                    var table = document.getElementById('public-list');
                     let person = allpeople[i];
                     let tableRow = document.createElement('tr');
 
@@ -90,6 +48,14 @@ let loadPeopleInNeed = () => {
 
                     table.appendChild(tableRow);
                 }
+
+                while (i < 0) {
+                    let emptyRow = document.createElement('tr');
+                    emptyRow.className = 'data-row';
+                    table.appendChild(emptyRow);
+                    i++;
+                }
+
             } else {
 
             }
@@ -99,11 +65,5 @@ let loadPeopleInNeed = () => {
 };
 
 let publicListMainFunction = () => {
-
-    //mock
-    for (let i = 0; i < 200; i++) {
-        listOfPeopleInNeed.push(listOfPeopleInNeed[i % 2]);
-    }
-
     loadPeopleInNeed();
 };
