@@ -27,9 +27,8 @@ let loadPeopleInNeed = () => {
             var status = getpeople.status;
             if (status === 0 || (status >= 200 && status < 400)) {
                 allpeople = JSON.parse(getpeople.responseText);
-                let i;
 
-                for (i = 0; i < allpeople.length; i++) {
+                for (let i = 0; i < allpeople.length; i++) {
                     var table = document.getElementById('public-list');
                     let person = allpeople[i];
                     let tableRow = document.createElement('tr');
@@ -47,13 +46,6 @@ let loadPeopleInNeed = () => {
                     tableRow.appendChild(matchedCell);
 
                     table.appendChild(tableRow);
-                }
-
-                while (i < 0) {
-                    let emptyRow = document.createElement('tr');
-                    emptyRow.className = 'data-row';
-                    table.appendChild(emptyRow);
-                    i++;
                 }
 
             } else {

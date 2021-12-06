@@ -250,6 +250,7 @@ button.match-button {
     .big-table tbody {
         display: block;
         max-height: 560px;
+        min-height: 560px;
         overflow-y: scroll;
     }
 
@@ -477,4 +478,32 @@ div.needy-form-right-div {
     width: 200px;
     text-align: left;
     float: left;
+}
+
+.index-wrapper {
+    width: 640px;
+    margin-top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.big-header {
+    font-size: 47px;
+    margin-bottom: 50px;
+}
+
+.index-button {
+    display: block;
+    width: 360px;
+    font-size: xx-large;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    color: #fefefe;
+    background-color: #4075c9;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
 }
