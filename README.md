@@ -11,6 +11,9 @@ pomocy uzyskaniem jej od osób chętnych do udzielenia jej.
 - Jakub Grenda https://github.com/7Bubun
 - Paweł Cegielski https://github.com/Skokus
 
+## Wideoprezentacja projektu
+https://www.youtube.com/watch?v=x5m-79j7-vg
+
 ## Opis funkcjonalności
 Aplikacja umożliwia osobom potrzebującym wypełnienie formularza, w którym podają swoje dane personalne i kontaktowe, opisują swą sytuację życiową, odpowiadają na kilka pytań, dzięki którym możliwe będzie ustalenie priorytetu pomocy im oraz podają produkty, które byłyby im potrzebne.
 Osoby chcące wesprzeć innych również mają do wypełnienia formularz, w którym podają swoje dane personalne i kontaktowe oraz wskazują produkty, które mogliby przekazać w ramach pomocy osobom w potrzebie.
